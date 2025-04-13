@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8" />
+  <title>Aplikacioni i Pyetesoreve Arsimore</title>
+  <style>
+    /* Import Montserrat font */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
+    /* Existing styles... */
+    body {
+      margin: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f5f7fa;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #2c3e50;
+      color: #fff;
+      padding: 10px 30px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 80px;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      width: 100px;
+      height: 100px;
+    }
+
+    .header-img {
+      margin-top: 80px;
+      width: 100%;
+      height: 150px;
+      background: url('https://cdn.wallpapersafari.com/32/24/GLWRuH.jpg') center/cover no-repeat;
+      border-bottom: 3px solid #ccc;
+    }
+
+    .page-title {
+      text-align: center;
+      margin: 20px 10px 10px;
+      background: linear-gradient(to right, red, black, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 36px;
+    }
+
+    .tab-links {
+      display: flex;
+      justify-content: flex-end;
+      margin-left: auto;
+    }
+
+    .tab-links button {
+      background-color: #ffffff;
+      color: #000000;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      margin: 0 5px;
+      width: 120px;
+    }
+
+    .tab-links button:hover {
+      background-color: #8e44ad;
+      color: #ffffff;
+      animation: pulse 0.6s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .tab-content {
+      display: none;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0px 1px 5px rgba(0,0,0,0.5);
+      margin-top: 20px;
+      transition: opacity 0.5s ease;
+      opacity: 0;
+      height: 100vh;
+    }
+
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .container {
+      padding: 10px 20px;
+      margin-bottom: 50px;
+    }
+
+    .description {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 24px;
+      line-height: 1.8;
+      margin: 20px 0;
+      text-align: center;
+      color: #333;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+.video-container {
+   margin: 20px 0;
+   text-align: center;
+   position: relative; /* Shtuar për menaxhimin e z-index */
+   z-index: 1; /* Zgjidhja për video që të jetë poshtë PDF */
+}
+
+
+    .footer-container {
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .footer-container .social-icons {
+      margin-bottom: 10px;
+    }
+
+    .footer-container .social-icons a {
+      margin: 0 8px;
+    }
+
+    .footer-container .social-icons img {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: white;
+      padding: 4px;
+      transition: 0.3s;
+    }
+
+    .footer-container .social-icons img:hover {
+      background: #8e44ad;
+      transform: scale(1.1);
+    }
+
+    /* Fullscreen Button Styles */
+    .fullscreen-btn {
+  background-color: #8e44ad;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;  /* Mund të ndryshoni këtë për të ndikuar më shumë në distancën */
+  transition: background-color 0.3s ease;
+  position: relative;
+  top: -30px; /* Ky kod do ta ngrejë butonin më lart në faqe */
+}
+
+.fullscreen-btn:hover {
+  background-color: #6a2c94;
+}
+
+.video-container {
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1; /* Ensures the video stays on top */
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 480px;
+  border: none;
+  border-radius: 15px;  /* Rounded corners for iframe */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  /* Subtle shadow for the iframe */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.video-container iframe:hover {
+  transform: scale(1.03); /* Slight zoom effect on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);  /* Stronger shadow when hovering */
+}
+
+/* PDF Viewer Container */
+.pdf-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.pdf-viewer {
+  width: 75%;
+  height: 450px;
+  border: none;
+  border-radius: 15px;  /* Bordo më të zbutura */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);  /* Hije kutie */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pdf-viewer:hover {
+  transform: scale(1.03); /* Efekt hover për ta bërë PDF-në të rritet pak kur kaloni mbi të */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* Hije më e theksuar kur kalohet mbi të */
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="menu">
+    <div class="logo">
+      <img src="https://scontent.ftia9-1.fna.fbcdn.net/v/t39.30808-6/412269567_823957432975227_6068767545621701224_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGbk3x7WdXwkf5Z7Y0xhCepPjGypHrkZCM-MbKkeuRkI2r4UUqL_SaZZkCXzCE-PoJh78QNxDeSfNif0CMekRcl&_nc_ohc=YB5jU_-oaVIQ7kNvwEGoKL5&_nc_oc=AdnTk5X7U7Tpx3kvjomT40IZRdzf6ogI0vp82kWeqMUQHX8rRacNxXkBYNOEGEIQ5uw&_nc_zt=23&_nc_ht=scontent.ftia9-1.fna&_nc_gid=mr1hEca6J0OYdgiySij0Vw&oh=00_AfFmmH8RRcC37yM2whV_zZVVW7-TTWJ_pKKkWna690xrFA&oe=67FDF405" alt="Logo" />
+      <h3 style="margin: 0;">High School "Ismail Qemali"</h3>
+    </div>
+    <div class="tab-links">
+      <button onclick="openTab('home')">Home</button>
+      <button onclick="openTab('magazine')">Magazine</button>
+    </div>
+  </div>
+
+  <div class="header-img"></div>
+
+  <div class="container">
+<div id="home" class="tab-content active">
+  <h1 class="page-title">STRIVING FOR GROWTH</h1>
+  <div class="description">
+    <p>As we step into our final year of high school, we carry with us countless memories, challenges, and lessons that have shaped who we are today. Join us as we reflect on the key experiences that have defined our journey and helped us grow, both as individuals and as a community.</p>
+  </div>
+  <!-- Video Container -->
+<!-- Embed Google Drive Video -->
+<div class="video-container">
+  <iframe src="https://drive.google.com/file/d/1SPOFcJay3YDnxqyS3AMk3CHrQu_7BWlo/preview" width="100%" height="480" allow="autoplay" allowfullscreen style="border: none; border-radius: 15px;"></iframe>
+</div>
+
+
+    </div>
+
+    <!-- Magazine Tab Content -->
+    <div id="magazine" class="tab-content">
+      <h2>Magazine Section</h2>
+      <p style="text-align: center; font-size: 18px; margin-bottom: 20px;">
+        High school is more than just books and bells—it’s an emotional rollercoaster that shapes who we become. It captures that feeling of walking into a new world full of strangers and slowly turning it into home. It’s the nerves on the first day, the panic before a test, the comfort of your favorite seat in class, and the thrill of finding your people. It’s laughter echoing in the hallways, tears you didn’t expect, the weight of expectations, and the pride when you finally rise above them. In these pages, you’ll find stories of insecurity turned into confidence, pressure transformed into passion, and uncertainty becoming purpose. This magazine is for anyone who’s ever felt lost, excited, overwhelmed, joyful—or all of it at once. Because that’s what high school is: a beautiful mess of emotions that lead to growth.
+      </p>
+      
+      <div class="pdf-container">
+  <iframe class="pdf-viewer" src="https://drive.google.com/file/d/1to8Hx48ot36RsZEvRDO8tbo90WMQSAFP/preview" title="PDF Viewer" allow="autoplay"></iframe>
+</div>
+
+
+      <button class="fullscreen-btn" onclick="toggleFullscreen()">Go Fullscreen</button>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-container">
+      <div class="social-icons">
+        <a href="https://www.facebook.com/ismailqemali.zyrtar/?locale=sq_AL" target="_self">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"/>
+        </a>
+        <a href="https://www.instagram.com/gjimnazi_ismail_qemali/?hl=en" target="_self">
+          <img src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-square2-512.png" alt="Instagram" />
+        </a>
+        <a href="mailto:gjimnaziismailqemalitirana@yahoo.com" target="_self">
+          <img src="https://cdn-icons-png.flaticon.com/512/281/281769.png" alt="Email" />
+        </a>
+      </div>
+      <p>Contact us: gjimnaziismailqemali.com</p>
+      <p>&copy; High School "Ismail Qemali", Tiranë 2025 - All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Open and switch tabs
+    function openTab(tabId) {
+      const tabs = document.querySelectorAll('.tab-content');
+      tabs.forEach(tab => {
+        tab.classList.remove('active');
+        tab.style.opacity = 0;
+      });
+      const activeTab = document.getElementById(tabId);
+      activeTab.classList.add('active');
+      setTimeout(() => {
+        activeTab.style.opacity = 1;
+      }, 10);
+    }
+
+    // Fullscreen function for PDF
+    function toggleFullscreen() {
+      const elem = document.querySelector('.pdf-viewer');
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { // Firefox
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { // IE/Edge
+        elem.msRequestFullscreen();
+      }
+    }
+
+  const video = document.getElementById("myVideo");
+
+ 
+  video.addEventListener("mouseover", function() {
+    video.play();  // Nis videon
+  });
+
+
+  video.addEventListener("mouseout", function() {
+    video.pause();  
+    video.currentTime = 0;  
+  });
+
+  video.addEventListener("mouseover", function () {
+    video.play();
+    if (video.requestFullscreen) {
+      video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) {
+      video.webkitRequestFullscreen();
+    } else if (video.mozRequestFullScreen) {
+      video.mozRequestFullScreen();
+    } else if (video.msRequestFullscreen) {
+      video.msRequestFullscreen();
+    }
+  });
+
+  video.addEventListener("mouseout", function () {
+    video.pause();
+    video.currentTime = 0;
+
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    } else if (document.webkitFullscreenElement) {
+      document.webkitExitFullscreen();
+    } else if (document.mozFullScreenElement) {
+      document.mozCancelFullScreen();
+    } else if (document.msFullscreenElement) {
+      document.msExitFullscreen();
+    }
+  });
+  </script>
+
+</body>
+</html>
